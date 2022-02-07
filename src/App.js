@@ -25,7 +25,7 @@ function App() {
     <Router>
       <Navbar bg="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="#" style={{ fontSize: 26, color: "green" }}>BlogApp</Navbar.Brand>
+          <Navbar.Brand> <Link to="/" style={{ fontSize: 26, color: "green", textDecoration: "none" }}>BlogApp</Link> </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
