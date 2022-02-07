@@ -5,9 +5,22 @@ import Home from './pages/home';
 import CreatePost from './pages/createpost';
 import Login from './pages/login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Nav, Navbar, Container, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Container, Form, FormControl, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import { signOut } from 'firebase/auth';
+import { auth } from './firebase-config';
 
 function App() {
+  const [isAuth, setIsAuth] = useState(false);
+
+  const signUserOut = () => {
+    signOut(auth).then(() => {
+      localStorage.clear();
+      setIsAuth(false);
+      window.location.pathname = "/login";
+    });
+  }
+
   return (
     <Router>
       <Navbar bg="dark" expand="lg">
@@ -23,7 +36,11 @@ function App() {
 
               <Link to="/" id="fornavbar">Home</Link>&nbsp;
               <Link to="/createpost" id="fornavbar">CreatePost</Link>&nbsp;
-              <Link to="/login" id="fornavbar">Login</Link>
+              {!isAuth ? (
+                <Link to="/login" id="fornavbar">Login</Link>
+              ) : (
+                <button onClick={signUserOut}>Logout</button>
+              )}
 
             </Nav>
             <Form className="d-flex">
@@ -39,9 +56,9 @@ function App() {
         </Container>
       </Navbar>
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/createpost' element={<CreatePost />}></Route>
-        <Route path='/login' element={<Login />}></Route>
+        <Route path='/' element={<Home />} />
+        <Route path='/createpost' element={<CreatePost />} />
+        <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
     </Router>
   );
