@@ -35,11 +35,15 @@ function App() {
             >&nbsp;
 
               <Link to="/" id="fornavbar">Home</Link>&nbsp;
-              <Link to="/createpost" id="fornavbar">CreatePost</Link>&nbsp;
+              
               {!isAuth ? (
                 <Link to="/login" id="fornavbar">Login</Link>
               ) : (
+                <>
+                  <Link to="/createpost" id="fornavbar">CreatePost</Link>&nbsp;
                 <button onClick={signUserOut}>Logout</button>
+                </>
+                
               )}
 
             </Nav>
@@ -57,7 +61,7 @@ function App() {
       </Navbar>
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/createpost' element={<CreatePost />} />
+        <Route path='/createpost' element={<CreatePost isAuth={isAuth} />} />
         <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
     </Router>
