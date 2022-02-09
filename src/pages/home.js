@@ -19,11 +19,11 @@ function Home(props) {
     }, []);
 
 
-    const postDelete= async(id)=>{
+    const postDelete = async (id) => {
         const postDoc = doc(db, "posts", id);
         await deleteDoc(postDoc);
     };
-    
+
     return (
         <div>
             <h1>{postList.map((post) => {
@@ -34,22 +34,27 @@ function Home(props) {
                         <h6>@{post.author.name}</h6> */}
                         <br />
                         <Card style={{ width: '24rem' }}>
-                           
+
                             <Card.Body>
                                 <Card.Title>
-                                    <h3>{post.title}</h3> 
-                                    <button onClick={()=>{
-                                        postDelete(post.id);
-                                    }} style={{backgroundColor: "white", border: "none"}}>&#128465;</button>
+                                    <h3>{post.title}</h3>
+
+                                    {   props.isAuth ?
+                                        <button onClick={() => {
+                                            postDelete(post.id);
+                                        }} style={{ backgroundColor: "white", border: "none" }}>&#128465;</button> : ""
+                                    }
+
+
                                 </Card.Title>
-                               
+
                                 <Card.Text>
                                     <h5>{post.post}</h5>
                                 </Card.Text>
                                 <Card.Text>
                                     <h6>@{post.author.name}</h6>
                                 </Card.Text>
-                                
+
                             </Card.Body>
                         </Card>
                     </div>
