@@ -1,6 +1,6 @@
 import { collection, deleteDoc, doc, getDocs } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase-config';
+import { auth, db } from '../firebase-config';
 import { Card } from 'react-bootstrap';
 
 function Home(props) {
@@ -29,9 +29,7 @@ function Home(props) {
             <h1>{postList.map((post) => {
                 return (
                     <div className='container'>
-                        {/* <h1>{post.title}</h1>
-                        <h3>{post.post}</h3>
-                        <h6>@{post.author.name}</h6> */}
+    
                         <br />
                         <Card style={{ width: '24rem' }}>
 
@@ -39,10 +37,10 @@ function Home(props) {
                                 <Card.Title>
                                     <h3>{post.title}</h3>
 
-                                    {   props.isAuth ?
+                                    {   props.isAuth && post.author.id === auth.currentUser.uid && (
                                         <button onClick={() => {
                                             postDelete(post.id);
-                                        }} style={{ backgroundColor: "white", border: "none" }}>&#128465;</button> : ""
+                                        }} style={{ backgroundColor: "white", border: "none" }}>&#128465;</button> )
                                     }
 
 
