@@ -25,7 +25,7 @@ function App() {
     <Router>
       <Navbar bg="dark" expand="lg">
         <Container>
-          <Navbar.Brand> <Link to="/" style={{ fontSize: 26, color: "green", textDecoration: "none" }}>BlogApp</Link> </Navbar.Brand>
+          <Navbar.Brand> <Link to="/" style={{ fontSize: 26, color: "#2ea44f", textDecoration: "none" }}>BlogApp</Link> </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -35,15 +35,15 @@ function App() {
             >&nbsp;
 
               <Link to="/" id="fornavbar">Home</Link>&nbsp;
-              
+
               {!isAuth ? (
                 <Link to="/login" id="fornavbar">Login</Link>
               ) : (
                 <>
                   <Link to="/createpost" id="fornavbar">CreatePost</Link>&nbsp;
-                <button onClick={signUserOut}>Logout</button>
+                  <button className="button-3" onClick={signUserOut}>Logout</button>
                 </>
-                
+
               )}
 
             </Nav>
@@ -60,7 +60,7 @@ function App() {
         </Container>
       </Navbar>
       <Routes>
-        <Route path='/' element={<Home isAuth={isAuth}/>} />
+        <Route path='/' element={<Home isAuth={isAuth} />} />
         <Route path='/createpost' element={<CreatePost isAuth={isAuth} />} />
         <Route path='/login' element={<Login setIsAuth={setIsAuth} />} />
       </Routes>
